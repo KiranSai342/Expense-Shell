@@ -31,16 +31,16 @@ Check_root(){
 Check_root | tee -a $Log_file
 
 dnf install mysql-server -y | tee -a $Log_file
-Validate $? "Installing Mysql server" | tee -a $Log_file
+Validate $? "Installing Mysql server" 
 
 systemctl enable mysqld | tee -a $Log_file
-Validate $? "Enabled is " | tee -a $Log_file
+Validate $? "Enabled is " 
 
 systemctl start mysqld | tee -a $Log_file
-Validate $? "started Mysql server" | tee -a $Log_file
+Validate $? "started Mysql server" 
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 | tee -a $Log_file
-Validate $? "Password setting " | tee -a $Log_file
+Validate $? "Password setting " 
 
 #mysql | tee -a $Log_file
 #Validate $? "Mysql installation" | tee -a $Log_file
