@@ -42,8 +42,8 @@ Validate $? "started Mysql server" | tee -a $Log_file
 mysql_secure_installation --set-root-pass ExpenseApp@1 | tee -a $Log_file
 Validate $? "Password setting " | tee -a $Log_file
 
-mysql | tee -a $Log_file
-Validate $? "Mysql installation" | tee -a $Log_file
+#mysql | tee -a $Log_file
+#Validate $? "Mysql installation" | tee -a $Log_file
 
 
 
