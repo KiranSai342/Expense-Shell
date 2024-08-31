@@ -28,25 +28,24 @@ Check_root(){
         exit 1
     fi 
 }
-Check_root 
+Check_root | tee -a $Log_file
 
-dnf install mysql-server -y
+dnf install mysql-server -y | tee -a $Log_file
 Validate $? "Installing Mysql server" | tee -a $Log_file
 
-systemctl enable mysqld
+systemctl enable mysqld | tee -a $Log_file
 Validate $? "Enabled is " | tee -a $Log_file
 
-systemctl start mysqld
+systemctl start mysqld | tee -a $Log_file
 Validate $? "started Mysql server" | tee -a $Log_file
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
+mysql_secure_installation --set-root-pass ExpenseApp@1 | tee -a $Log_file
 Validate $? "Password setting " | tee -a $Log_file
 
-mysql
+mysql | tee -a $Log_file
 Validate $? "Mysql installation" | tee -a $Log_file
 
-show databases;
-Validate $? "Fetching databases" | tee -a $Log_file
+
 
 
 
