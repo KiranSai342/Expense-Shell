@@ -39,8 +39,16 @@ Validate $? "Enabled is "
 systemctl start mysqld | tee -a $Log_file
 Validate $? "started Mysql server" 
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 | tee -a $Log_file
-Validate $? "Password setting " 
+
+mysql -h kiran-devops.omline -u root -pExpenseApp@1 -e 'show databases;' &>>Log_file
+if [ $? -ne 0 ]
+then
+    echo "Password has not been created yet.. Creating it..."
+    mysql_secure_installation --set-root-pass ExpenseApp@1 | tee -a $Log_file
+    Validate $? "Password setting " 
+else
+    echo "password has been already created" | tee -a $Log_file
+fi
 
 #mysql | tee -a $Log_file
 #Validate $? "Mysql installation" | tee -a $Log_file
