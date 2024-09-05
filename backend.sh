@@ -40,7 +40,7 @@ dnf install nodejs -y &>>$Log_file
 Validate $? "Installation of NodeJs 20 version" | tee -a $Log_file
 
 id expense
-if [ $? -nq 0  ]
+if [ $? -nq 0 ]
 then
     echo "User is not created.. Creating now" | tee -a $Log_file
     useradd expense &>>$Log_file
