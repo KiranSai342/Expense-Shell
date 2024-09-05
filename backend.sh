@@ -39,5 +39,59 @@ Validate $? "Enabled 20 version of node JS" | tee -a $Log_file
 dnf install nodejs -y &>>$Log_file
 Validate $? "Installation of NodeJs 20 version" | tee -a $Log_file
 
+id expense
+if [ $? -nq 0  ]
+then
+    echo "User is not created.. Creating now" | tee -a $Log_file
+    useradd expense &>>$Log_file
+    Valuidate $? "Creating Expense User" |tee -a $Log_file
+else
+    echo "User already created" | tee -a $Log_file
+fi
+
+mkdir -p /app &>>$Log_file
+Validate $? "creating directory ..."
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$Log_file
+Validate $? "Downloading backend code"
+
+cd /app
+
+rm -rf /app/* #Remove the existing code
+unzip /tmp/backend.zip &>>$Log_file
+Validate $? "Extracting backend code"
+
+npm install &>>$Log_file
+
+cp /home/ec2-user/Expense-Shell/backend.service /etc/systemd/system/backend.service
+
+#Load the data before running backend
+
+dnf install mysql -y &>>$Log_file
+Validate $? "Mysql client "
+
+mysql -h  -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$Log_file
+Validate $? "Schema loading"
+
+systemctl daemon-reload &>>$Log_file
+Validate $? "Daemon-reload "
+
+systemctl enable backend &>>$Log_file
+Validate $? "Enabled backend"
+
+systemctl restart backend &>>$Log_file
+Validate $? "Restart backend"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
