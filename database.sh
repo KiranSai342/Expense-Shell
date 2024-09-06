@@ -40,7 +40,7 @@ systemctl start mysqld | tee -a $Log_file
 Validate $? "started Mysql server" 
 
 
-mysql -h database.kiran-devops.online -u root -p ExpenseApp@1 -e 'show databases;' &>>Log_file
+mysql -h database.kiran-devops.online -u root -pExpenseApp@1 -e 'show databases;' &>>Log_file
 if [ $? -ne 0 ]
 then
     echo "Password has not been created yet.. Creating it..."
