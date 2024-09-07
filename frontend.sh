@@ -49,7 +49,7 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$Log_file
 Validate $? "Extracting the code"
 
-
+cp /home/ec2-user/Expense-Shell/expense.config /etc/nginx/default.d/expense.conf
 
 systemctl restart nginx &>>$Log_file
 Validate $? "Restrast the nginx"
