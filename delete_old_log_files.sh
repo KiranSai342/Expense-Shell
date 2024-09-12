@@ -15,6 +15,6 @@ echo "Files:$Files"
 
 while IFS= read -r file # IFS = Internal field seperator, empty it will ignore while space.-r is for not to ignore special charecters like /
 do 
-    echo "Deleting line : $file"
+    echo "Deleting file : $file"
     rm -rf $file
 done <<< $Files
