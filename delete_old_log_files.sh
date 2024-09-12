@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Source_Dir=/home/ece2-user/log
+Source_Dir=/home/ec2-user/log
 
 if [ -d $Source_Dir ]
 then 
