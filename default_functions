@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e # settig the automatice exit, if we get an error, set -ex (for debug)
+
+trap '' ERR # ERR is the Error signal
+
+failure(){
+    echo "Failed at $1:$2"
+}
+
+# we can use like 
+trap 'failure "${LINENO}" "BASH_COMMAND"' ERR   #ERR is the Error signal
+
+
+#Finding the files older tham 14 days
+find . -name "*.log" -mtime +14
